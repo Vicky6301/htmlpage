@@ -120,8 +120,8 @@ body, html {
 
 /* + Button Styling */
 .more-button {
-    position: fixed;
-    bottom: 80px;
+    position: absolute;
+    bottom: 50px;
     right: 20px;
     background-color: #007bff;
     color: white;
@@ -136,14 +136,13 @@ body, html {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
-    z-index: 10;
+    z-index: 10; 
 }
 
 .more-button:hover {
     background-color: #0056b3;
     transform: scale(1.1);
 }
-
 /* Responsive Adjustments */
 @media (max-width: 480px) {
     .mobile-container {
