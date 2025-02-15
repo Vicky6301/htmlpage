@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="Index.css">
+</head>
+
+<body>
+    <div class="mobile-container">
+     
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="Images/Bag1.jpg" class="d-block w-100" alt="Slider Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="Images/Bag2.jpg" class="d-block w-100" alt="Slider Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="Images/Bag3.jpg" class="d-block w-100" alt="Slider Image 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="menu">
+            <span>Shopping</span>
+            <div>
+                <i class="fa-solid fa-th-large icon grid-view"></i>
+                <i class="fa-solid fa-bars icon list-view"></i>
+            </div>
+            <span>9/9</span>
+        </div>
+
+        <div class="mobile-container">
+            <div class="gallery">
+                <img src="Images/Bag1.jpg" alt="Gallery Item 1" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <img src="Images/Bag2.jpg" alt="Gallery Item 2" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <img src="Images/Bag3.jpg" alt="Gallery Item 3" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <img src="Images/Bag1.jpg" alt="Gallery Item 4" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <img src="Images/Bag2.jpg" alt="Gallery Item 5" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <img src="Images/Bag3.jpg" alt="Gallery Item 6" data-bs-toggle="modal" data-bs-target="#imageModal">
+                <span class="more-button">+</span>
+            </div>
+    
+            <div class="bottom-nav">
+                <i class="fa-solid fa-house nav-icon"></i>
+                <i class="fa-solid fa-magnifying-glass nav-icon"></i>
+                <i class="fa-solid fa-calendar-plus nav-icon active"></i>
+                <i class="fa-regular fa-comment nav-icon"></i>
+                <i class="fa-regular fa-user nav-icon"></i>
+            </div>
+        </div>
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" id="popup-image" class="img-fluid" alt="Popup Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', function () {
+                document.getElementById('popup-image').src = this.src;
+            });
+        });
+
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            icon.addEventListener('click', function () {
+                document.querySelectorAll('.nav-icon').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        document.querySelector('.grid-view').addEventListener('click', function () {
+            document.querySelector('.gallery').style.gridTemplateColumns = 'repeat(2, 1fr)';
+        });
+
+        document.querySelector('.list-view').addEventListener('click', function () {
+            document.querySelector('.gallery').style.gridTemplateColumns = '1fr';
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('.gallery img');
+            const moreButton = document.querySelector('.more-button');
+            const imageLimit = 4;
+
+            // Show only first 4 images initially
+            images.forEach((img, index) => {
+                if (index >= imageLimit) {
+                    img.style.display = 'none';
+                }
+            });
+
+            // If more than 4 images, show + More button
+            if (images.length > imageLimit) {
+                moreButton.classList.add('show');
+            }
+
+            // On clicking + More, reveal the rest
+            moreButton.addEventListener('click', function () {
+                images.forEach(img => {
+                    img.style.display = 'block';
+                });
+                moreButton.style.display = 'none';
+            });
+        });
+
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            icon.addEventListener('click', function () {
+                document.querySelectorAll('.nav-icon').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+         // Popup Image Functionality
+         document.querySelectorAll('.popup-image').forEach(img => {
+            img.addEventListener('click', function () {
+                const popupImage = document.getElementById('popup-image');
+                popupImage.src = this.src;
+                const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+                imageModal.show();
+            });
+        });
+
+        // Active State for Bottom Nav
+        document.querySelectorAll('.nav-icon').forEach(icon => {
+            icon.addEventListener('click', function () {
+                document.querySelectorAll('.nav-icon').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
